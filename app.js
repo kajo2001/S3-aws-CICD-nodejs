@@ -1,9 +1,24 @@
 const express = require('express');
+var mysql=require("mysql2");
 const app = express();
 const PORT = process.env.PORT || 3000;
-// app.get('/', (req, res) => {
-//     res.send('Hello Express!');
-// });
+
+var con= mysql.createConnection({
+  host:"mydatabase.cjmamy44e1z1.eu-north-1.rds.amazonaws.com",
+  user:"admin",
+  password:"Ciit#2026",
+  database:"College"
+});
+
+app.get("/api/student",(req,res)=>{
+  con.connect(function(err){
+    if(err) throw err;
+    con.query("select * from Students",(err,result)=>{
+      if(err) throw err;
+      return res.send(result);
+    })
+  })
+})
 
 app.get('/', (req, res) => {
     // res.send('Hello Express!');
