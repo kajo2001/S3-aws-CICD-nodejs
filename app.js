@@ -5,15 +5,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+
+app.get("/api/student",(req,res)=>{
 var con= mysql.createConnection({
   host:"mydatabase.cjmamy44e1z1.eu-north-1.rds.amazonaws.com",
   user:"admin",
   password:"Ciit#2026",
   database:"College"
 });
+    con.connect(function(err){
 
-app.get("/api/student",(req,res)=>{
-  con.connect(function(err){
     if(err) throw err;
     con.query("select * from Students",(err,result)=>{
       if(err) throw err;
@@ -30,7 +32,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/student', (req, res) => {
-  con.connect(function(err){
+  var con= mysql.createConnection({
+  host:"mydatabase.cjmamy44e1z1.eu-north-1.rds.amazonaws.com",
+  user:"admin",
+  password:"Ciit#2026",
+  database:"College"
+});
+    con.connect(function(err){
     if(err) throw err;
     con.query("select * from Students",(err,result)=>{
       if(err) throw err;
@@ -44,6 +52,12 @@ app.get('/student', (req, res) => {
 
     
 });
+
+app.get("/api/test",function(req,res){
+  res.send("Test API is working");
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
