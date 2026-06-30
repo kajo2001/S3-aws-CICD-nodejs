@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS Data Display</title>
+    <style>
+        table { width: 50%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <!-- Accessing a single string variable passed from Node.js -->
+    <h2><%= pageTitle %></h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Qualification</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through the array passed from Node.js -->
+            <% if (users && users.length > 0) { %>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.Student_rollno %></td>
+                        <td><%= user.Student_name %></td>
+                        <td><%= user.Student_Qualification %></td>
+                        <td><%= user.Student_Percentage %></td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="3">No users found.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>
